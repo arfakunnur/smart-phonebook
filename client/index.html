@@ -13,91 +13,108 @@
 </head>
 <body>
   
-  <div class="container">
+  <!-- SaaS / CRM Dashboard Layout Wrapper -->
+  <div class="dashboard-layout">
+    
+    <!-- Left Navigation & Form Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-brand">
+        <h2>Smart Phonebook</h2>
+        <p>CRM Contacts Manager</p>
+      </div>
 
-    <!-- Premium App Header -->
-    <header class="app-header">
-      <h1>Smart Phonebook</h1>
+      <!-- Add/Edit Contact Form housed directly in the Sidebar -->
+      <form id="contactForm">
+        <h3>➕ Create New Contact</h3>
+
+        <input type="text" id="name" placeholder="Full Name *" required autocomplete="name">
+
+        <input type="text" id="phone" placeholder="Phone Number (10 digits) *" required autocomplete="tel" pattern="\d{10}">
+
+        <input type="email" id="email" placeholder="Email Address" autocomplete="email">
+
+        <input type="text" id="company" placeholder="Company / Organization" autocomplete="organization">
+
+        <input type="text" id="address" placeholder="Physical Address" class="full-width" autocomplete="street-address">
+
+        <input type="text" id="tags" placeholder="Tags (comma separated, e.g. Work, Family)" class="full-width">
+
+        <button type="submit">Add Contact</button>
+      </form>
+    </aside>
+
+    <!-- Right Side Dynamic Content Area -->
+    <div class="content-area">
       
-      <!-- Theme Switcher Toggle -->
-      <div class="theme-switch-wrapper">
-        <label class="theme-switch" for="themeCheckbox">
-          <input type="checkbox" id="themeCheckbox" />
-          <div class="slider">
-            <span class="sun-icon">☀️</span>
-            <span class="moon-icon">🌙</span>
+      <!-- Top Fixed Header (Topbar Style) for Search & Controls -->
+      <header class="topbar">
+        <!-- CRM-style Search Input Wrapper with Icon -->
+        <div class="search-wrapper">
+          <span class="search-icon">🔍</span>
+          <input
+            type="text"
+            id="searchInput"
+            placeholder="Search contacts by name, phone, email, or company..."
+            autocomplete="off"
+          />
+        </div>
+        
+        <!-- Theme Switcher Toggle -->
+        <div class="theme-switch-wrapper">
+          <label class="theme-switch" for="themeCheckbox">
+            <input type="checkbox" id="themeCheckbox" />
+            <div class="slider">
+              <span class="sun-icon">☀️</span>
+              <span class="moon-icon">🌙</span>
+            </div>
+          </label>
+        </div>
+      </header>
+
+      <!-- Main Contents Container -->
+      <main class="main-content">
+
+        <!-- Statistics Panel Dashboard -->
+        <div class="stats-dashboard">
+          <div class="stat-card" id="statTotal">
+            <div class="stat-value">0</div>
+            <div class="stat-label">Total Contacts</div>
           </div>
-        </label>
-      </div>
-    </header>
+          <div class="stat-card" id="statFavorites">
+            <div class="stat-value">0</div>
+            <div class="stat-label">Favorites ⭐</div>
+          </div>
+          <div class="stat-card" id="statTags">
+            <div class="stat-value">0</div>
+            <div class="stat-label">Unique Tags</div>
+          </div>
+        </div>
 
-    <!-- Statistics Panel Dashboard -->
-    <div class="stats-dashboard">
-      <div class="stat-card" id="statTotal">
-        <div class="stat-value">0</div>
-        <div class="stat-label">Total Contacts</div>
-      </div>
-      <div class="stat-card" id="statFavorites">
-        <div class="stat-value">0</div>
-        <div class="stat-label">Favorites ⭐</div>
-      </div>
-      <div class="stat-card" id="statTags">
-        <div class="stat-value">0</div>
-        <div class="stat-label">Unique Tags</div>
-      </div>
+        <!-- Actions & CSV Utilities -->
+        <div class="action-bar">
+          <!-- Clickable Tag Filter Chips Bar -->
+          <div class="tag-filters-container" id="tagFilters">
+            <span class="filter-label">Filter:</span>
+            <button class="tag-chip active" data-tag="all">All Contacts</button>
+            <!-- Dynamic tag filters will be inserted here -->
+          </div>
+
+          <div style="display: flex; gap: 8px;">
+            <button class="backup-btn" id="exportBtn" title="Export Contacts to CSV">
+              📥 Export CSV
+            </button>
+            <button class="backup-btn" id="importBtn" title="Import Contacts from JSON Backup">
+              📤 Import JSON
+            </button>
+            <input type="file" id="importFileInput" accept=".json" style="display: none;" />
+          </div>
+        </div>
+
+        <!-- Contact List Grid -->
+        <div id="contactList"></div>
+
+      </main>
     </div>
-
-    <!-- Actions & Search Bar -->
-    <div class="action-bar">
-      <!-- Search Input Wrapper with Icon -->
-      <div class="search-wrapper">
-        <span class="search-icon">🔍</span>
-        <input
-          type="text"
-          id="searchInput"
-          placeholder="Search by name, phone, email, or company..."
-          autocomplete="off"
-        />
-      </div>
-
-      <!-- Backup Utilities -->
-      <button class="backup-btn" id="exportBtn" title="Export Contacts to CSV">
-        📥 Export CSV
-      </button>
-      <button class="backup-btn" id="importBtn" title="Import Contacts from JSON Backup">
-        📤 Import JSON
-      </button>
-      <input type="file" id="importFileInput" accept=".json" style="display: none;" />
-    </div>
-
-    <!-- Clickable Tag Filter Chips Bar -->
-    <div class="tag-filters-container" id="tagFilters">
-      <span class="filter-label">Filter:</span>
-      <button class="tag-chip active" data-tag="all">All Contacts</button>
-      <!-- Dynamic tag filters will be inserted here -->
-    </div>
-
-    <!-- Contact Form Overhaul -->
-    <form id="contactForm">
-      <h3>➕ Create New Contact</h3>
-
-      <input type="text" id="name" placeholder="Full Name *" required autocomplete="name">
-
-      <input type="text" id="phone" placeholder="Phone Number *" required autocomplete="tel">
-
-      <input type="email" id="email" placeholder="Email Address" autocomplete="email">
-
-      <input type="text" id="company" placeholder="Company / Organization" autocomplete="organization">
-
-      <input type="text" id="address" placeholder="Physical Address" class="full-width" autocomplete="street-address">
-
-      <input type="text" id="tags" placeholder="Tags (comma separated, e.g. Work, Family, Friend)" class="full-width">
-
-      <button type="submit">Add Contact</button>
-    </form>
-
-    <!-- Contact List Grid -->
-    <div id="contactList"></div>
 
   </div>
 

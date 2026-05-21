@@ -418,6 +418,13 @@ contactForm.addEventListener("submit", async (e) => {
     tags: contactForm.tags.value.trim(),
   };
 
+  // Restrict phone input to accept ONLY exactly 10 digits
+  const phoneRegex = /^\d{10}$/;
+  if (!phoneRegex.test(newContact.phone)) {
+    showToast("Phone number must be exactly 10 digits (numbers only)", "error");
+    return;
+  }
+
   if (isBackendOnline) {
     try {
       if (id) {
@@ -696,6 +703,29 @@ document.addEventListener("keydown", (e) => {
     closeDetailsModal();
   }
 });
+
+// -----------------------------
+// DYNAMIC PHONE INPUT FILTER
+// -----------------------------
+const phoneInput = document.getElementById("phone");
+if (phoneInput) {
+  // Only allow digits to be typed
+  phoneInput.addEventListener("keypress", (e) => {
+    // Allow digits, and control keys like Backspace, Enter, Delete, arrow keys
+    if (e.key < "0" || e.key > "9") {
+      e.preventDefault();
+    }
+  });
+
+  // Limit characters and sanitize input on paste/change
+  phoneInput.addEventListener("input", (e) => {
+    let cleaned = phoneInput.value.replace(/\D/g, "");
+    if (cleaned.length > 10) {
+      cleaned = cleaned.substring(0, 10);
+    }
+    phoneInput.value = cleaned;
+  });
+}
 
 // -----------------------------
 // INITIAL INITIALIZATION

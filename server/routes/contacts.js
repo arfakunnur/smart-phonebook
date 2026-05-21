@@ -32,6 +32,14 @@ router.post("/", async (req, res) => {
       });
     }
 
+    // Strict phone validation: accept ONLY exactly 10 digits
+    const phoneRegex = /^\d{10}$/;
+    if (!phoneRegex.test(phone)) {
+      return res.status(400).json({
+        error: "Phone number must be exactly 10 digits (numbers only)",
+      });
+    }
+
     const result = await pool.query(
       `INSERT INTO contacts (name, phone, email, company, address, tags)
        VALUES ($1, $2, $3, $4, $5, $6)
