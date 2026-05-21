@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Phonebook - Sleek Contacts Manager</title>
+
+  <!-- Legacy Styles -->
+  <link rel="stylesheet" href="style.css">
+  
+  <!-- Premium Modern Design Stylesheet -->
+  <link rel="stylesheet" href="modern.css">
+</head>
+<body>
+  
+  <div class="container">
+
+    <!-- Premium App Header -->
+    <header class="app-header">
+      <h1>Smart Phonebook</h1>
+      
+      <!-- Theme Switcher Toggle -->
+      <div class="theme-switch-wrapper">
+        <label class="theme-switch" for="themeCheckbox">
+          <input type="checkbox" id="themeCheckbox" />
+          <div class="slider">
+            <span class="sun-icon">☀️</span>
+            <span class="moon-icon">🌙</span>
+          </div>
+        </label>
+      </div>
+    </header>
+
+    <!-- Statistics Panel Dashboard -->
+    <div class="stats-dashboard">
+      <div class="stat-card" id="statTotal">
+        <div class="stat-value">0</div>
+        <div class="stat-label">Total Contacts</div>
+      </div>
+      <div class="stat-card" id="statFavorites">
+        <div class="stat-value">0</div>
+        <div class="stat-label">Favorites ⭐</div>
+      </div>
+      <div class="stat-card" id="statTags">
+        <div class="stat-value">0</div>
+        <div class="stat-label">Unique Tags</div>
+      </div>
+    </div>
+
+    <!-- Actions & Search Bar -->
+    <div class="action-bar">
+      <!-- Search Input Wrapper with Icon -->
+      <div class="search-wrapper">
+        <span class="search-icon">🔍</span>
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Search by name, phone, email, or company..."
+          autocomplete="off"
+        />
+      </div>
+
+      <!-- Backup Utilities -->
+      <button class="backup-btn" id="exportBtn" title="Export Contacts to CSV">
+        📥 Export CSV
+      </button>
+      <button class="backup-btn" id="importBtn" title="Import Contacts from JSON Backup">
+        📤 Import JSON
+      </button>
+      <input type="file" id="importFileInput" accept=".json" style="display: none;" />
+    </div>
+
+    <!-- Clickable Tag Filter Chips Bar -->
+    <div class="tag-filters-container" id="tagFilters">
+      <span class="filter-label">Filter:</span>
+      <button class="tag-chip active" data-tag="all">All Contacts</button>
+      <!-- Dynamic tag filters will be inserted here -->
+    </div>
+
+    <!-- Contact Form Overhaul -->
+    <form id="contactForm">
+      <h3>➕ Create New Contact</h3>
+
+      <input type="text" id="name" placeholder="Full Name *" required autocomplete="name">
+
+      <input type="text" id="phone" placeholder="Phone Number *" required autocomplete="tel">
+
+      <input type="email" id="email" placeholder="Email Address" autocomplete="email">
+
+      <input type="text" id="company" placeholder="Company / Organization" autocomplete="organization">
+
+      <input type="text" id="address" placeholder="Physical Address" class="full-width" autocomplete="street-address">
+
+      <input type="text" id="tags" placeholder="Tags (comma separated, e.g. Work, Family, Friend)" class="full-width">
+
+      <button type="submit">Add Contact</button>
+    </form>
+
+    <!-- Contact List Grid -->
+    <div id="contactList"></div>
+
+  </div>
+
+  <!-- Detailed Contact Modal Overlay -->
+  <div class="modal-overlay" id="contactModal">
+    <div class="modal-content">
+      <button class="modal-close" id="modalCloseBtn">&times;</button>
+      
+      <div class="modal-header">
+        <div class="avatar-circle" id="modalAvatar" style="background-color: var(--primary);">SP</div>
+        <div>
+          <h2 id="modalName" style="font-family: var(--font-heading); font-weight: 700; color: var(--text-main);">Contact Name</h2>
+          <p id="modalCompany" style="font-size: 0.85rem; color: var(--text-muted);">Company Name</p>
+        </div>
+      </div>
+
+      <div class="modal-body">
+        <div>
+          <div class="modal-label">📞 Phone</div>
+          <div class="modal-value" id="modalPhone">N/A</div>
+        </div>
+        <div>
+          <div class="modal-label">📧 Email</div>
+          <div class="modal-value" id="modalEmail">N/A</div>
+        </div>
+        <div>
+          <div class="modal-label">🏢 Address</div>
+          <div class="modal-value" id="modalAddress">N/A</div>
+        </div>
+        <div>
+          <div class="modal-label">🏷️ Tags</div>
+          <div class="card-tags" id="modalTags">
+            <!-- Dynamic tags in modal -->
+          </div>
+        </div>
+        <div style="margin-top: 10px;">
+          <div class="modal-label">📍 Map Mockup</div>
+          <div class="map-mockup">
+            <span class="map-pin">📍</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Custom Success/Error Toast Notifications Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- App Main Controller Logic -->
+  <script src="script.js"></script>
+
+</body>
+</html>
