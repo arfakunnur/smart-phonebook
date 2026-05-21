@@ -1,5 +1,5 @@
 /* =======================================================
-   SMART PHONEBOOK - CRM DASHBOARD STYLING
+   SMART PHONEBOOK - CRM RESPONSIVE DASHBOARD STYLING
    ======================================================= */
 
 /* Import Google Fonts */
@@ -8,11 +8,13 @@
 /* Color Variables - Dark / Light Modes */
 :root {
   /* Light Mode Palette */
-  --bg-app: linear-gradient(135deg, #f1f5f9, #e2e8f0);
+  --bg-app: linear-gradient(135deg, #f8fafc, #f1f5f9);
   --bg-card: rgba(255, 255, 255, 0.75);
-  --border-card: rgba(255, 255, 255, 0.45);
+  --bg-card-hover: rgba(255, 255, 255, 0.9);
+  --border-card: rgba(255, 255, 255, 0.5);
   --border-divider: rgba(226, 232, 240, 0.8);
-  --shadow-card: 0 8px 24px rgba(148, 163, 184, 0.12);
+  --shadow-card: 0 4px 20px rgba(148, 163, 184, 0.08);
+  --shadow-hover: 0 10px 30px rgba(99, 102, 241, 0.12);
   --text-main: #0f172a;
   --text-muted: #64748b;
   --primary: #4f46e5;
@@ -28,12 +30,14 @@
 
 [data-theme="dark"] {
   /* Dark Mode Palette */
-  --bg-app: linear-gradient(135deg, #0f172a, #1a1b3a);
-  --bg-card: rgba(15, 23, 42, 0.65);
-  --border-card: rgba(255, 255, 255, 0.08);
+  --bg-app: linear-gradient(135deg, #0f172a, #111827);
+  --bg-card: rgba(17, 24, 39, 0.65);
+  --bg-card-hover: rgba(31, 41, 55, 0.85);
+  --border-card: rgba(255, 255, 255, 0.05);
   --border-divider: rgba(255, 255, 255, 0.06);
-  --shadow-card: 0 10px 40px rgba(0, 0, 0, 0.35);
-  --text-main: #f1f5f9;
+  --shadow-card: 0 10px 30px rgba(0, 0, 0, 0.3);
+  --shadow-hover: 0 12px 35px rgba(0, 0, 0, 0.45);
+  --text-main: #f8fafc;
   --text-muted: #94a3b8;
   --primary: #6366f1;
   --primary-hover: #818cf8;
@@ -59,51 +63,35 @@ body {
   padding: 0 !important;
   transition: background 0.5s ease, color 0.3s ease;
   line-height: 1.5;
-  overflow: hidden; /* Main page container is layout split */
-}
-
-/* Scrollbar Styling for Scrollable Panels */
-::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
-}
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-::-webkit-scrollbar-thumb {
-  background: rgba(99, 102, 241, 0.25);
-  border-radius: 99px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(99, 102, 241, 0.5);
+  overflow-x: hidden;
 }
 
 /* =======================================================
-   CRM LAYOUT STRUCTURE (DASHBOARD-GRID)
+   CRM LAYOUT STRUCTURE & SYSTEM
    ======================================================= */
 
 .dashboard-layout {
   display: flex;
   width: 100vw;
   height: 100vh;
-  overflow: hidden;
+  overflow: hidden; /* Perfect scroll isolation on desktop */
 }
 
-/* Sidebar Styling (Left Columns Panel) */
+/* Left Sidebar Navigation & Form Panel (Independent scroll) */
 .sidebar {
-  width: 320px;
+  width: 340px;
   background: var(--bg-card);
-  backdrop-filter: blur(20px) saturate(120%);
-  -webkit-backdrop-filter: blur(20px) saturate(120%);
+  backdrop-filter: blur(24px) saturate(120%);
+  -webkit-backdrop-filter: blur(24px) saturate(120%);
   border-right: 1px solid var(--border-divider) !important;
-  padding: 30px 24px;
+  padding: 40px 24px;
   display: flex;
   flex-direction: column;
-  gap: 25px;
+  gap: 30px;
   flex-shrink: 0;
   overflow-y: auto;
   z-index: 150;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .sidebar-brand {
@@ -113,7 +101,7 @@ body {
 .sidebar-brand h2 {
   font-family: var(--font-heading);
   font-weight: 800;
-  font-size: 1.6rem;
+  font-size: 1.7rem;
   background: linear-gradient(135deg, var(--primary), #a855f7);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -122,42 +110,44 @@ body {
 
 .sidebar-brand p {
   font-size: 0.75rem;
-  font-weight: 600;
+  font-weight: 700;
   text-transform: uppercase;
   color: var(--text-muted);
-  letter-spacing: 1px;
+  letter-spacing: 1.5px;
+  margin-top: 3px;
 }
 
-/* Sidebar Contact Form */
+/* Dynamic Add/Edit Contact Form */
 #contactForm {
-  background: rgba(255, 255, 255, 0.03);
+  background: rgba(255, 255, 255, 0.02);
   border: 1px solid var(--border-card);
-  border-radius: 18px;
-  padding: 18px;
+  border-radius: 20px;
+  padding: 20px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 14px;
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.01);
 }
 
 #contactForm h3 {
   font-family: var(--font-heading);
-  font-size: 1.05rem;
+  font-size: 1.1rem;
   font-weight: 700;
   color: var(--text-main);
-  margin-bottom: 4px;
+  margin-bottom: 2px;
 }
 
 #contactForm input {
   width: 100% !important;
   margin: 0 !important;
-  padding: 11px 13px !important;
+  padding: 12px 14px !important;
   font-family: var(--font-body);
-  font-size: 0.85rem;
+  font-size: 0.88rem;
   color: var(--text-main);
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid var(--border-card) !important;
-  border-radius: 9px !important;
-  transition: all 0.25s ease;
+  border-radius: 10px !important;
+  transition: all 0.2s ease;
 }
 
 #contactForm input:focus {
@@ -169,27 +159,27 @@ body {
 
 #contactForm button[type="submit"] {
   width: 100% !important;
-  padding: 12px !important;
+  padding: 13px !important;
   font-family: var(--font-heading);
   font-weight: 700;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   letter-spacing: 0.5px;
   color: white;
   background: linear-gradient(135deg, var(--primary), #6366f1) !important;
   border: none !important;
-  border-radius: 9px !important;
+  border-radius: 10px !important;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
   margin-top: 5px;
-  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.25);
+  box-shadow: 0 4px 14px rgba(99, 102, 241, 0.3);
 }
 
 #contactForm button[type="submit"]:hover {
   transform: translateY(-2px) scale(1.01) !important;
-  box-shadow: 0 6px 15px rgba(99, 102, 241, 0.4);
+  box-shadow: 0 8px 20px rgba(99, 102, 241, 0.45);
 }
 
-/* Right Side Content Area */
+/* Right Content Area Box */
 .content-area {
   flex: 1;
   display: flex;
@@ -199,43 +189,43 @@ body {
   position: relative;
 }
 
-/* Fixed/Sticky Topbar (Header Search Area) */
+/* Fixed topbar style header */
 .topbar {
-  height: 70px;
+  height: 80px;
   background: var(--bg-card);
-  backdrop-filter: blur(20px) saturate(120%);
-  -webkit-backdrop-filter: blur(20px) saturate(120%);
+  backdrop-filter: blur(24px) saturate(120%);
+  -webkit-backdrop-filter: blur(24px) saturate(120%);
   border-bottom: 1px solid var(--border-divider);
-  padding: 0 30px;
+  padding: 0 40px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 20px;
+  gap: 25px;
   flex-shrink: 0;
   z-index: 100;
   position: sticky;
   top: 0;
 }
 
-/* CRM Search field styling */
+/* CRM Search bar input wrapper */
 .search-wrapper {
   position: relative;
   flex: 1;
-  max-width: 580px;
+  max-width: 620px;
 }
 
 #searchInput {
   width: 100% !important;
-  padding: 11px 16px 11px 40px !important;
+  padding: 12px 16px 12px 42px !important;
   margin: 0 !important;
   font-family: var(--font-body);
-  font-size: 0.9rem;
+  font-size: 0.92rem;
   color: var(--text-main);
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid var(--border-card) !important;
-  border-radius: 12px !important;
+  border-radius: 14px !important;
   transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.01);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.02);
 }
 
 #searchInput:focus {
@@ -247,15 +237,15 @@ body {
 
 .search-icon {
   position: absolute;
-  left: 14px;
+  left: 15px;
   top: 50%;
   transform: translateY(-50%);
   color: var(--text-muted);
   pointer-events: none;
-  font-size: 1rem;
+  font-size: 1.05rem;
 }
 
-/* Theme Switch Toggle Slider */
+/* Theme Toggle Switch */
 .theme-switch-wrapper {
   display: flex;
   align-items: center;
@@ -311,65 +301,68 @@ body {
   transform: translateX(24px);
 }
 
-/* Scrollable Main Content Frame */
+/* Scrollable Main Content Port */
 .main-content {
   flex: 1;
-  padding: 30px;
+  padding: 40px;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
-  gap: 25px;
+  gap: 30px;
 }
 
 /* Statistics Dashboard Grid */
 .stats-dashboard {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 15px;
+  gap: 20px;
 }
 
 .stat-card {
   background: var(--bg-card);
   border: 1px solid var(--border-card);
-  border-radius: 16px;
-  padding: 18px 15px;
+  border-radius: 20px;
+  padding: 20px 15px;
   text-align: center;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: var(--shadow-card);
 }
 
 .stat-card:hover {
-  transform: translateY(-2px);
+  transform: translateY(-3px);
   background: var(--primary-light);
   border-color: var(--primary);
+  box-shadow: 0 8px 24px rgba(99, 102, 241, 0.12);
 }
 
 .stat-value {
   font-family: var(--font-heading);
-  font-size: 1.8rem;
+  font-size: 2.1rem;
   font-weight: 800;
   color: var(--primary);
   margin-bottom: 4px;
+  letter-spacing: -1px;
 }
 
 .stat-label {
   font-size: 0.72rem;
-  font-weight: 700;
+  font-weight: 750;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.8px;
   color: var(--text-muted);
 }
 
-/* Actions & Utilities Bar */
+/* Actions Utility Panel Bar */
 .action-bar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 15px;
+  gap: 20px;
   flex-wrap: wrap;
+  padding-bottom: 5px;
 }
 
-/* Horizontal Swipe Tag Filters Bar */
+/* Horizontal Touch Swipe Tags Filters chip strip */
 .tag-filters-container {
   display: flex;
   align-items: center;
@@ -381,29 +374,35 @@ body {
   min-width: 0;
   padding: 4px 0;
   -webkit-overflow-scrolling: touch;
+  
+  /* Hide scrollbar for standard browsers */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE 10+ */
 }
 
-/* Hide scrollbar for swiping */
+/* Hide scrollbar for webkit (Chrome, Safari) */
 .tag-filters-container::-webkit-scrollbar {
   display: none;
+  width: 0;
+  height: 0;
 }
 
 .filter-label {
   font-size: 0.75rem;
-  font-weight: 750;
+  font-weight: 800;
   color: var(--text-muted);
   text-transform: uppercase;
-  letter-spacing: 0.5px;
-  margin-right: 4px;
+  letter-spacing: 0.8px;
+  margin-right: 6px;
   flex-shrink: 0;
 }
 
 .tag-chip {
-  padding: 6px 14px;
+  padding: 7px 15px;
   border-radius: 99px;
   background: var(--bg-card);
   border: 1px solid var(--border-card);
-  font-size: 0.8rem;
+  font-size: 0.82rem;
   font-weight: 600;
   color: var(--text-muted);
   cursor: pointer;
@@ -415,27 +414,27 @@ body {
   background: var(--primary) !important;
   color: white !important;
   border-color: var(--primary) !important;
-  box-shadow: 0 4px 10px var(--primary-light);
+  box-shadow: 0 4px 12px var(--primary-light);
 }
 
-/* Backup and Export Utilities */
+/* CSV and backup utilities buttons */
 .backup-btn {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
   width: auto !important;
-  padding: 10px 16px !important;
+  padding: 11px 18px !important;
   background: var(--bg-card) !important;
   color: var(--text-main) !important;
   border: 1px solid var(--border-card) !important;
-  border-radius: 10px !important;
+  border-radius: 12px !important;
   font-family: var(--font-body);
   font-weight: 600;
   font-size: 0.85rem;
   cursor: pointer;
   white-space: nowrap;
-  transition: all 0.3s ease !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
   box-shadow: var(--shadow-card);
 }
 
@@ -444,6 +443,7 @@ body {
   border-color: var(--primary) !important;
   color: var(--primary) !important;
   transform: translateY(-2px) !important;
+  box-shadow: 0 6px 15px rgba(99, 102, 241, 0.15);
 }
 
 /* Contact List Layout - Multi-column Responsive Grid */
@@ -458,8 +458,8 @@ body {
   background: var(--bg-card) !important;
   border: 1px solid var(--border-card) !important;
   border-left: 6px solid var(--primary) !important;
-  border-radius: 18px !important;
-  padding: 20px !important;
+  border-radius: 20px !important;
+  padding: 22px !important;
   margin-top: 0 !important;
   display: flex;
   flex-direction: column;
@@ -471,18 +471,19 @@ body {
 
 .contact-card:hover {
   transform: translateY(-6px) !important;
-  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: var(--shadow-hover) !important;
+  background: var(--bg-card-hover) !important;
   border-color: rgba(99, 102, 241, 0.3) !important;
 }
 
-/* Star/Favorite Icon */
+/* Star/Favorite Star Icon */
 .star-btn-card {
   position: absolute;
-  top: 15px;
-  right: 15px;
+  top: 18px;
+  right: 18px;
   background: transparent !important;
   border: none !important;
-  font-size: 1.3rem !important;
+  font-size: 1.35rem !important;
   color: var(--text-muted) !important;
   width: auto !important;
   padding: 0 !important;
@@ -492,12 +493,12 @@ body {
 
 .star-btn-card:hover {
   color: var(--accent-star) !important;
-  transform: scale(1.2) !important;
+  transform: scale(1.25) !important;
 }
 
 .star-btn-card.starred {
   color: var(--accent-star) !important;
-  filter: drop-shadow(0 0 2px rgba(234, 179, 8, 0.5));
+  filter: drop-shadow(0 0 3px rgba(234, 179, 8, 0.45));
 }
 
 /* Header Avatar + Info inside Cards */
@@ -519,7 +520,7 @@ body {
   align-items: center;
   justify-content: center;
   font-family: var(--font-heading);
-  font-weight: 700;
+  font-weight: 750;
   font-size: 1.1rem;
   color: white;
   text-shadow: 0 2px 4px rgba(0,0,0,0.15);
@@ -847,49 +848,52 @@ body {
   }
 }
 
-/* ========================================================
-   RESPONSIVE DESIGN BREAKPOINTS (MOBILE & TABLET FIRST)
-   ======================================================== */
+/* =====================================================================
+   RESPONSIVE DESIGN BREAKPOINTS (COLLAPSIBLE MOBILE-FIRST GRID REWRITE)
+   ===================================================================== */
 
-/* Desktop layout adjusts slightly on small desktops/tablets */
+/* Tablet Optimization */
 @media (max-width: 1024px) {
   .sidebar {
-    width: 280px;
-    padding: 20px;
+    width: 290px;
+    padding: 30px 20px;
   }
   .topbar {
-    padding: 0 20px;
+    padding: 0 25px;
+    height: 70px;
   }
   .main-content {
-    padding: 20px;
+    padding: 25px;
   }
   #contactList {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
-/* Collapsible SaaS Layout on Large Tablets & Small Viewports */
+/* SaaS Grid Layout Collapse & natural scrolling for all screens below 992px */
 @media (max-width: 992px) {
   body {
-    overflow: auto; /* Allow the entire page to scroll vertically on mobile */
+    overflow: auto !important; /* Enable native document page scrolling */
   }
 
   .dashboard-layout {
+    display: flex;
     flex-direction: column;
-    height: auto;
     width: 100%;
+    height: auto;
     overflow: visible;
   }
 
-  /* Fixed sticky topbar stays at very top of mobile screen */
+  /* Fixed sticky topbar stays locked at absolute top of mobile viewport */
   .topbar {
     position: sticky;
     top: 0;
     width: 100%;
-    height: 60px;
-    padding: 0 15px;
-    border-bottom: 1px solid var(--border-divider);
-    z-index: 200;
+    height: 65px;
+    padding: 0 20px;
+    z-index: 1000;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    background: var(--bg-card);
   }
   
   .search-wrapper {
@@ -898,23 +902,26 @@ body {
 
   /* Sidebar stacks below the topbar */
   .sidebar {
-    width: 100%;
-    height: auto;
-    overflow-y: visible;
+    width: 100% !important;
+    height: auto !important;
+    overflow-y: visible !important;
     border-right: none !important;
     border-bottom: 1px solid var(--border-divider) !important;
-    padding: 20px 15px;
+    padding: 25px 20px;
   }
 
-  /* Content area takes remaining page scroll flow */
+  /* Content area takes natural stream height scroll */
   .content-area {
+    width: 100%;
     height: auto;
+    display: block;
     overflow: visible;
   }
 
   .main-content {
-    padding: 20px 15px;
-    overflow-y: visible;
+    padding: 25px 20px;
+    overflow: visible;
+    height: auto;
   }
   
   .stats-dashboard {
@@ -922,10 +929,37 @@ body {
   }
 }
 
-/* Mobile Phones viewports */
+/* Small Tablets & Large Phones (<= 768px) */
+@media (max-width: 768px) {
+  /* Action Bar collapses to vertical stack to prevent overlaps */
+  .action-bar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 15px;
+  }
+
+  .tag-filters-container {
+    width: 100%;
+  }
+
+  .action-bar div[style*="display: flex"] {
+    width: 100%;
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .backup-btn {
+    width: 100% !important;
+    padding: 12px !important;
+  }
+}
+
+/* Mobile Phones (<= 600px) */
 @media (max-width: 600px) {
   .topbar {
-    height: 56px;
+    height: 60px;
+    padding: 0 15px;
   }
 
   .search-wrapper {
@@ -934,41 +968,42 @@ body {
 
   #searchInput {
     font-size: 0.85rem;
-    padding: 9px 12px 9px 34px !important;
+    padding: 10px 12px 10px 34px !important;
   }
 
   .search-icon {
     left: 12px;
-    font-size: 0.9rem;
+    font-size: 0.95rem;
   }
 
-  /* Compact stats on small screens */
+  /* Compact Dashboard Stats */
   .stats-dashboard {
-    gap: 8px;
+    gap: 10px;
   }
   
   .stat-card {
-    padding: 10px 5px;
-    border-radius: 12px;
+    padding: 12px 8px;
+    border-radius: 14px;
   }
   
   .stat-value {
-    font-size: 1.3rem;
+    font-size: 1.4rem;
   }
   
   .stat-label {
-    font-size: 0.62rem;
+    font-size: 0.65rem;
+    letter-spacing: 0.2px;
   }
 
-  /* 1-Column contacts grid on mobile */
+  /* Exactly 1-Column contacts grid layout on mobile screens */
   #contactList {
-    grid-template-columns: 1fr;
-    gap: 12px;
+    grid-template-columns: 1fr !important;
+    gap: 15px;
   }
   
   .contact-card {
-    padding: 16px !important;
-    border-radius: 14px !important;
+    padding: 18px !important;
+    border-radius: 16px !important;
   }
   
   .card-actions button {
@@ -981,11 +1016,11 @@ body {
     width: 95%;
   }
   
-  /* Shift Toast Container on mobile to bottom middle */
+  /* Toast messages centered on mobile screens */
   .toast-container {
-    left: 10px;
-    right: 10px;
-    bottom: 15px;
+    left: 15px;
+    right: 15px;
+    bottom: 20px;
     align-items: center;
   }
   
@@ -994,24 +1029,24 @@ body {
   }
 }
 
-/* Extremely Small Phones */
-@media (max-width: 380px) {
+/* Extremely Small Phones (< 400px) */
+@media (max-width: 400px) {
   .stats-dashboard {
     grid-template-columns: 1fr;
-    gap: 6px;
+    gap: 8px;
   }
   
   .stat-card {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 15px;
+    padding: 12px 20px;
     text-align: left;
   }
   
   .stat-value {
     margin-bottom: 0;
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     order: 2;
   }
   
