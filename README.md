@@ -26,7 +26,6 @@ Smart Phonebook is a full-stack contact management web application that helps us
 - **Frontend:** HTML, CSS, JavaScript  
 - **Backend:** Node.js, Express.js  
 - **Database:** PostgreSQL  
-- **Storage Fallback:** localStorage (offline mode)
 
 ---
 
@@ -39,12 +38,17 @@ cd smart-phonebook
 
 ### 2. Install backend dependencies
 
-cd backend
+cd server
 npm install
+
+### 3.frontend folder
+client
+backend folder
+server
 
 ---
 
-### 3. Setup environment variables
+### 4. Setup environment variables
 
 Create a `.env` file in backend folder:
 
@@ -56,19 +60,16 @@ DB_NAME=phonebook
 
 ---
 
-### 4. Run backend server
+### 5. Run backend server
 
 node server.js
 
-or
-
-nodemon server.js
-
 ---
 
-### 5. Run frontend
+### 6. Run frontend
 
 Open index.html in browser OR use Live Server in VS Code
+
 
 ## 🌐 API Endpoints
 
