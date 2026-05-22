@@ -69,3 +69,86 @@ button:hover {
   padding: 6px 10px;
   font-size: 12px;
 }
+
+@media (max-width: 1024px) {
+  .container {
+    margin-left: 200px;
+  }
+}
+
+@media (max-width: 768px) {
+  body {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+  }
+
+  .container {
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .topbar {
+    left: 0;
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .menu-item {
+    text-align: center;
+    font-size: 12px;
+  }
+
+  input {
+    width: 100%;
+  }
+
+  .contact-card {
+    font-size: 13px;
+  }
+}
+
+.star-btn {
+  margin-left: 8px;
+  cursor: pointer;
+  color: #bbb;
+  font-size: 18px;
+  transition: 0.2s;
+}
+
+.star-btn:hover {
+  transform: scale(1.2);
+}
+
+.star-btn.active {
+  color: gold;
+  text-shadow: 0 0 6px gold;
+}
+
+.name-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.star-inline {
+  cursor: pointer;
+  font-size: 16px;
+  color: #bbb;
+  transition: 0.2s ease;
+  user-select: none;
+}
+
+.star-inline:hover {
+  transform: scale(1.2);
+  color: gold;
+}
+
+.star-inline.active {
+  color: gold;
+}

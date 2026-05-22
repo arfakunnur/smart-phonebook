@@ -71,6 +71,47 @@ router.delete("/:id", async (req, res) => {
 });
 
 // ==========================
+// UPDATE CONTACT
+// ==========================
+router.put("/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { name, phone, email, company, address, tags } = req.body;
+
+    if (!name || !phone) {
+      return res.status(400).json({
+        error: "Name and phone are required",
+      });
+    }
+
+    // Strict phone validation: accept ONLY exactly 10 digits
+    const phoneRegex = /^\d{10}$/;
+    if (!phoneRegex.test(phone)) {
+      return res.status(400).json({
+        error: "Phone number must be exactly 10 digits (numbers only)",
+      });
+    }
+
+    const result = await pool.query(
+      `UPDATE contacts
+       SET name = $1, phone = $2, email = $3, company = $4, address = $5, tags = $6
+       WHERE id = $7
+       RETURNING *`,
+      [name, phone, email, company, address, tags, id]
+    );
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({ error: "Contact not found" });
+    }
+
+    res.json(result.rows[0]);
+  } catch (error) {
+    console.error("PUT error:", error.message);
+    res.status(500).json({ error: "Server Error" });
+  }
+});
+
+// ==========================
 // SEARCH CONTACTS (FIXED)
 // ==========================
 router.get("/search", async (req, res) => {

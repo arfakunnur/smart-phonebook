@@ -5,25 +5,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Smart Phonebook - Sleek Contacts Manager</title>
 
-  <!-- Legacy Styles -->
+  <!-- Styles -->
   <link rel="stylesheet" href="style.css">
-  
-  <!-- Premium Modern Design Stylesheet -->
   <link rel="stylesheet" href="modern.css">
 </head>
+
 <body>
-  
-  <!-- SaaS / CRM Dashboard Layout Wrapper -->
+
+  <!-- DASHBOARD WRAPPER -->
   <div class="dashboard-layout">
-    
-    <!-- Left Navigation & Form Sidebar -->
+
+    <!-- SIDEBAR -->
     <aside class="sidebar">
+
       <div class="sidebar-brand">
         <h2>Smart Phonebook</h2>
         <p>CRM Contacts Manager</p>
       </div>
 
-      <!-- Add/Edit Contact Form housed directly in the Sidebar -->
+      <!-- CONTACT FORM -->
       <form id="contactForm">
         <h3>➕ Create New Contact</h3>
 
@@ -41,14 +41,15 @@
 
         <button type="submit">Add Contact</button>
       </form>
+
     </aside>
 
-    <!-- Right Side Dynamic Content Area -->
+    <!-- MAIN CONTENT AREA -->
     <div class="content-area">
-      
-      <!-- Top Fixed Header (Topbar Style) for Search & Controls -->
+
+      <!-- TOPBAR -->
       <header class="topbar">
-        <!-- CRM-style Search Input Wrapper with Icon -->
+
         <div class="search-wrapper">
           <span class="search-icon">🔍</span>
           <input
@@ -58,8 +59,8 @@
             autocomplete="off"
           />
         </div>
-        
-        <!-- Theme Switcher Toggle -->
+
+        <!-- THEME TOGGLE -->
         <div class="theme-switch-wrapper">
           <label class="theme-switch" for="themeCheckbox">
             <input type="checkbox" id="themeCheckbox" />
@@ -69,101 +70,125 @@
             </div>
           </label>
         </div>
+
       </header>
 
-      <!-- Main Contents Container -->
+      <!-- MAIN CONTENT -->
       <main class="main-content">
 
-        <!-- Statistics Panel Dashboard -->
+        <!-- STATS DASHBOARD -->
         <div class="stats-dashboard">
+
           <div class="stat-card" id="statTotal">
             <div class="stat-value">0</div>
             <div class="stat-label">Total Contacts</div>
           </div>
+
           <div class="stat-card" id="statFavorites">
             <div class="stat-value">0</div>
-            <div class="stat-label">Favorites ⭐</div>
+            <div class="stat-label">Favorites ⭐
+</div>
           </div>
+
           <div class="stat-card" id="statTags">
             <div class="stat-value">0</div>
             <div class="stat-label">Unique Tags</div>
           </div>
+
         </div>
 
-        <!-- Actions & CSV Utilities -->
+        <!-- ACTION BAR -->
         <div class="action-bar">
-          <!-- Clickable Tag Filter Chips Bar -->
+
           <div class="tag-filters-container" id="tagFilters">
             <span class="filter-label">Filter:</span>
             <button class="tag-chip active" data-tag="all">All Contacts</button>
-            <!-- Dynamic tag filters will be inserted here -->
           </div>
 
           <div style="display: flex; gap: 8px;">
-            <button class="backup-btn" id="exportBtn" title="Export Contacts to CSV">
-              📥 Export CSV
-            </button>
-            <button class="backup-btn" id="importBtn" title="Import Contacts from JSON Backup">
-              📤 Import JSON
-            </button>
+            <button class="backup-btn" id="exportBtn">📥 Export CSV</button>
+            <button class="backup-btn" id="importBtn">📤 Import JSON</button>
             <input type="file" id="importFileInput" accept=".json" style="display: none;" />
           </div>
+
         </div>
 
-        <!-- Contact List Grid -->
+        <!-- CONTACT LIST -->
         <div id="contactList"></div>
 
       </main>
     </div>
-
   </div>
 
-  <!-- Detailed Contact Modal Overlay -->
+  <!-- MODAL -->
   <div class="modal-overlay" id="contactModal">
+
     <div class="modal-content">
+
       <button class="modal-close" id="modalCloseBtn">&times;</button>
-      
+
       <div class="modal-header">
-        <div class="avatar-circle" id="modalAvatar" style="background-color: var(--primary);">SP</div>
+
+        <div class="avatar-circle" id="modalAvatar">SP</div>
+
         <div>
-          <h2 id="modalName" style="font-family: var(--font-heading); font-weight: 700; color: var(--text-main);">Contact Name</h2>
-          <p id="modalCompany" style="font-size: 0.85rem; color: var(--text-muted);">Company Name</p>
+          <h2 id="modalName">Contact Name</h2>
+          <p id="modalCompany">Company Name</p>
         </div>
+
       </div>
 
       <div class="modal-body">
+
         <div>
           <div class="modal-label">📞 Phone</div>
           <div class="modal-value" id="modalPhone">N/A</div>
         </div>
+
         <div>
           <div class="modal-label">📧 Email</div>
           <div class="modal-value" id="modalEmail">N/A</div>
         </div>
+
         <div>
           <div class="modal-label">🏢 Address</div>
           <div class="modal-value" id="modalAddress">N/A</div>
         </div>
+
         <div>
           <div class="modal-label">🏷️ Tags</div>
-          <div class="card-tags" id="modalTags">
-            <!-- Dynamic tags in modal -->
-          </div>
+          <div class="card-tags" id="modalTags"></div>
         </div>
+
         <div style="margin-top: 10px;">
           <div class="modal-label">📍 Map Mockup</div>
           <div class="map-mockup">
             <span class="map-pin">📍</span>
           </div>
         </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- CONFIRMATION MODAL -->
+  <div class="modal-overlay" id="confirmModal">
+    <div class="modal-content" style="max-width: 400px; text-align: center; padding: 30px;">
+      <div style="font-size: 3rem; margin-bottom: 15px; color: var(--accent-danger);">⚠️</div>
+      <h3 id="confirmTitle" style="font-family: var(--font-heading); font-size: 1.3rem; font-weight: 700; margin-bottom: 10px; color: var(--text-main);">Delete Contact?</h3>
+      <p id="confirmMessage" style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 25px; line-height: 1.4;">Are you sure you want to delete this contact? This action cannot be undone.</p>
+      <div style="display: flex; gap: 12px; justify-content: center;">
+        <button id="confirmCancelBtn" class="backup-btn" style="flex: 1; padding: 10px !important; margin: 0 !important; width: auto !important;">Cancel</button>
+        <button id="confirmOkBtn" class="backup-btn" style="flex: 1; background: var(--accent-danger) !important; color: white !important; border-color: var(--accent-danger) !important; padding: 10px !important; margin: 0 !important; width: auto !important;">Delete</button>
       </div>
     </div>
   </div>
 
-  <!-- Custom Success/Error Toast Notifications Container -->
+  <!-- TOAST NOTIFICATIONS -->
   <div class="toast-container" id="toastContainer"></div>
 
-  <!-- App Main Controller Logic -->
+  <!-- SCRIPT -->
   <script src="script.js"></script>
 
 </body>
