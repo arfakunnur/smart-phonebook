@@ -1,4 +1,4 @@
-# 📒 Smart Phonebook
+# Smart Phonebook
 
 Smart Phonebook is a full-stack contact management web application that helps users efficiently store, manage, search, and organize contacts with a modern UI, offline support, and real-time features.
 
