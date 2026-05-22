@@ -15,7 +15,6 @@ Smart Phonebook is a full-stack contact management web application that helps us
 -  Dark / Light mode toggle
 -  Export contacts as CSV
 -  Import contacts from backup file
--  Offline support using localStorage fallback
 -  Fully responsive UI design
 -  Toast notifications for user actions
 
