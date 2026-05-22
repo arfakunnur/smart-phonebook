@@ -4,24 +4,24 @@ Smart Phonebook is a full-stack contact management web application that helps us
 
 ---
 
-## 🚀 Features
+## Features
 
-- ➕ Add new contacts
-- ✏️ Edit existing contacts
-- 🗑️ Delete contacts
-- 🔍 Real-time search functionality
-- ⭐ Mark favorite contacts (star system)
-- 🏷️ Filter contacts by tags
-- 🌙 Dark / Light mode toggle
-- 📤 Export contacts as CSV
-- 📥 Import contacts from backup file
-- 💾 Offline support using localStorage fallback
-- 📱 Fully responsive UI design
-- 🔔 Toast notifications for user actions
+-  Add new contacts
+-  Edit existing contacts
+-  Delete contacts
+-  Real-time search functionality
+-  Mark favorite contacts (star system)
+-  Filter contacts by tags
+-  Dark / Light mode toggle
+-  Export contacts as CSV
+-  Import contacts from backup file
+-  Offline support using localStorage fallback
+-  Fully responsive UI design
+-  Toast notifications for user actions
 
 ---
 
-## 🛠️ Tech Stack
+##  Tech Stack
 
 - **Frontend:** HTML, CSS, JavaScript  
 - **Backend:** Node.js, Express.js  
@@ -29,7 +29,7 @@ Smart Phonebook is a full-stack contact management web application that helps us
 
 ---
 
-## 📦 Installation & Setup
+##  Installation & Setup
 
 ### 1. Clone the repository
 ```bash
@@ -71,7 +71,7 @@ node server.js
 Open index.html in browser OR use Live Server in VS Code
 
 
-## 🌐 API Endpoints
+##  API Endpoints
 
 - GET /contacts → Get all contacts
 - POST /contacts → Add contact
